@@ -4,8 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
+import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -24,11 +30,15 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/customer")
-	public Customer retrieveVechileBean() {
+	public Response retrieveVechileBean(@RequestParam("id") Long customerId) {
 
 		
-		Optional<Customer> customer = customerRepository.findById(1L);
+		Optional<Customer> customer = customerRepository.findById(customerId);
 
-		return customer.get();
+		if (customer.isPresent())
+			return Response.ok().entity(customer.get()).build();
+		else
+			return Response.status(Status.NOT_FOUND).build();
+		
 	}
 }
