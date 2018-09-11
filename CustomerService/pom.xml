@@ -118,7 +118,13 @@
     <artifactId>javaee-web-api</artifactId>
     <version>6.0</version>
     <scope>provided</scope>
-</dependency>			
+</dependency>
+		<dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+            <scope>provided</scope>
+        </dependency>			
 		
 	</dependencies>
 
